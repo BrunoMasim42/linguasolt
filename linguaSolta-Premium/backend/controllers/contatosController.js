@@ -1,0 +1,6 @@
+
+const pool = require('../config/db');
+exports.listar = async (_req, res) => { try { const [rows] = await pool.query('SELECT * FROM contatos ORDER BY criado_em DESC'); res.json(rows); } catch (error) { res.status(500).json({ erro:'Erro ao listar contatos.', detalhe:error.message }); } };
+exports.criar = async (req, res) => { try { const { nome, email, mensagem } = req.body; await pool.query('INSERT INTO contatos (nome, email, mensagem) VALUES (?, ?, ?)', [nome, email, mensagem]); res.status(201).json({ mensagem:'Mensagem enviada com sucesso.'}); } catch (error) { res.status(500).json({ erro:'Erro ao salvar contato.', detalhe:error.message }); } };
+exports.marcarLido = async (req, res) => { try { await pool.query('UPDATE contatos SET lido = 1 WHERE id = ?', [req.params.id]); res.json({ mensagem:'Mensagem marcada como lida.'}); } catch (error) { res.status(500).json({ erro:'Erro ao atualizar contato.', detalhe:error.message }); } };
+exports.excluir = async (req, res) => { try { await pool.query('DELETE FROM contatos WHERE id = ?', [req.params.id]); res.json({ mensagem:'Contato excluído com sucesso.'}); } catch (error) { res.status(500).json({ erro:'Erro ao excluir contato.', detalhe:error.message }); } };

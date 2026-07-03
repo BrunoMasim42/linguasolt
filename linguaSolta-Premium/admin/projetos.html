@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Projetos</title>
+  <link rel="stylesheet" href="./assets/css/admin.css">
+  <script src="./assets/js/admin.js" defer></script>
+</head>
+<body class="admin-page">
+  <aside class="sidebar">
+    <h2>Admin Língua Solta</h2>
+    <p id="sidebar-user" class="muted">Painel administrador</p>
+
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="acoes.html">Ações</a>
+      <a href="projetos.html" class="active">Projetos</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="banners.html">Banners</a>
+      <a href="paginas.html">Páginas</a>
+      <a href="prestacao.html">Prestação</a>
+      <a href="contatos.html">Contatos</a>
+      <a href="#" id="logout-btn">Sair</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <section class="panel">
+      <h1>Projetos</h1>
+
+      <form id="form-projeto" class="form-grid" enctype="multipart/form-data">
+        <input
+          type="text"
+          name="titulo"
+          placeholder="Título"
+          required
+        >
+
+        <textarea
+          name="descricao"
+          placeholder="Descrição"
+          required
+        ></textarea>
+
+        <input
+          type="file"
+          name="imagem"
+          accept="image/*"
+        >
+
+        <div class="toolbar">
+          <button class="btn" type="submit">Salvar</button>
+          <button class="btn alt" type="button" id="cancelar-projeto">Cancelar edição</button>
+        </div>
+
+        <p id="status-projetos" class="status muted"></p>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Projetos cadastrados</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Imagem</th>
+              <th>Título</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-projetos">
+            <tr>
+              <td colspan="3">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

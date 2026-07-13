@@ -1,5 +1,5 @@
-const API_BASE = window.API_BASE || localStorage.getItem('site_api_base') || 'http://177.153.33.133:3000/api';
-const API_ORIGIN = API_BASE.replace(/\/api\/?$/, '');
+const API_BASE = `${window.location.origin}/api`;
+const API_ORIGIN = window.location.origin;
 
 const qs = (selector, parent = document) => parent.querySelector(selector);
 const qsa = (selector, parent = document) => [...parent.querySelectorAll(selector)];

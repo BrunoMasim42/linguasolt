@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credenciados | Instituto Língua Solta</title>
+
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/credenciados.css">
+
+  <script src="./js/site.js" defer></script>
+  <script src="./js/credenciados.js" defer></script>
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="logo">
+        <img src="./img/logoPaquena.png" alt="Logo">
+    </div>
+
+    <nav class="menu">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="texto.html">Quem Somos</a></li>
+            <li><a href="projetos.html">Projetos</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="credenciados.html" class="active">Credenciados</a></li>
+            <li><a href="prestacao.html">Prestação de Contas</a></li>
+        </ul>
+    </nav>
+
+    <div class="social">
+        <a href="https://www.instagram.com/institutolinguasolta/" target="_blank">
+            <i class='bx bxl-instagram-alt'></i>
+        </a>
+
+        <a href="#">
+            <i class='bx bxl-youtube'></i>
+        </a>
+
+        <a href="#">
+            <i class='bx bxl-whatsapp'></i>
+        </a>
+    </div>
+
+    <div class="hamburger">
+        ☰
+    </div>
+
+</header>
+
+
+<section class="page-banner">
+
+    <div class="container">
+
+        <h1>Credenciados</h1>
+
+        <p>
+            Conheça os profissionais e associados credenciados
+            pelo Instituto Língua Solta.
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="container">
+
+    <div class="credenciados-toolbar">
+
+        <input
+            type="text"
+            id="pesquisa"
+            placeholder="Pesquisar por nome, cidade ou profissão..."
+        >
+
+        <select id="cidade">
+
+            <option value="">Todos os municípios</option>
+
+        </select>
+
+    </div>
+
+</section>
+
+
+<section class="container">
+
+    <div id="lista-credenciados" class="credenciados-grid">
+
+        <!-- carregado pelo JavaScript -->
+
+    </div>
+
+</section>
+
+
+<div id="modalCredenciado" class="modal hidden">
+
+    <div class="modal-content modal-perfil">
+
+        <button id="fecharModal" class="modal-close">
+
+            ×
+
+        </button>
+
+        <div class="perfil-topo">
+
+            <img
+                id="perfilImagem"
+                src=""
+                alt=""
+            >
+
+            <div>
+
+                <h2 id="perfilNome"></h2>
+
+                <h4 id="perfilCargo"></h4>
+
+                <span id="perfilCidade"></span>
+
+            </div>
+
+        </div>
+
+        <div class="perfil-conteudo">
+
+            <p id="perfilBiografia"></p>
+
+        </div>
+
+        <div class="perfil-contatos">
+
+            <a
+                id="perfilWhatsapp"
+                target="_blank"
+                class="hidden"
+            >
+                <i class='bx bxl-whatsapp'></i>
+
+                WhatsApp
+            </a>
+
+            <a
+                id="perfilInstagram"
+                target="_blank"
+                class="hidden"
+            >
+                <i class='bx bxl-instagram'></i>
+
+                Instagram
+            </a>
+
+            <a
+                id="perfilFacebook"
+                target="_blank"
+                class="hidden"
+            >
+                <i class='bx bxl-facebook'></i>
+
+                Facebook
+            </a>
+
+            <a
+                id="perfilEmail"
+                class="hidden"
+            >
+                <i class='bx bx-envelope'></i>
+
+                E-mail
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer class="site-footer">
+
+    <p>
+
+        © 2026 - Instituto Língua Solta - Todos os direitos reservados
+
+    </p>
+
+</footer>
+
+</body>
+</html>

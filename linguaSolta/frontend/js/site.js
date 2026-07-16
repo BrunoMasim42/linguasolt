@@ -434,7 +434,10 @@ function initContactForm() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+
+document.addEventListener('DOMContentLoaded', async () => {
+
+ 
   initPageTransitions();
   initHeader();
   initModals();
@@ -447,4 +450,19 @@ document.addEventListener('DOMContentLoaded', () => {
   loadGaleria();
   loadPrestacao();
   loadQuemSomos();
+
 });
+
+const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+
+qsa('.menu a').forEach((link) => {
+
+  link.classList.remove('active');
+
+  if (link.getAttribute('href') === currentPage) {
+    link.classList.add('active');
+  }
+
+});
+
+

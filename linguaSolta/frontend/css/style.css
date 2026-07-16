@@ -143,16 +143,43 @@ select{
   transition:transform .25s ease;
 }
 
-.menu a.active,
-.menu a:hover{
-  background:rgba(255,255,255,.15);
-  color:#fff7c4;
-  transform:translateY(-1px);
+.menu a{
+
+    position:relative;
+    display:block;
+    padding:10px 13px;
+    color:#fff;
+    font-size:.98rem;
+    font-weight:700;
+    border-radius:999px;
+
+    transition:
+        background .25s,
+        color .25s,
+        transform .25s;
+
 }
 
-.menu a.active::after,
-.menu a:hover::after{
-  transform:scaleX(1);
+.menu a:hover{
+
+    background:rgba(255,255,255,.15);
+    color:#fff7c4;
+    transform:translateY(-2px);
+
+}
+
+.menu a.active{
+
+    background:rgba(255,255,255,.15);
+    color:#fff7c4;
+
+}
+
+.menu a:hover::after,
+.menu a.active::after{
+
+    transform:scaleX(1);
+
 }
 
 .social{

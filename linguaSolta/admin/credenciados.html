@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin - Credenciados</title>
+<link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+<div class="container">
+<h1>Credenciados</h1>
+<form id="credenciadoForm" enctype="multipart/form-data">
+<label>Foto</label>
+<input type="file" name="imagem" accept="image/*">
+<label>Nome</label>
+<input type="text" name="nome" required>
+<label>Categoria</label>
+<input type="text" name="categoria">
+<label>Cidade</label>
+<input type="text" name="cidade">
+<label>Histórico</label>
+<textarea name="historico" rows="4"></textarea>
+<label>Status</label>
+<select name="ativo">
+<option value="1">Ativo</option>
+<option value="0">Inativo</option>
+</select>
+<button type="submit">Salvar</button>
+</form>
+
+<hr>
+
+<table>
+<thead><tr><th>Foto</th><th>Nome</th><th>Categoria</th><th>Cidade</th><th>Status</th><th>Ações</th></tr></thead>
+<tbody id="listaCredenciados"></tbody>
+</table>
+</div>
+<script src="assets/js/credenciados.js"></script>
+</body>
+</html>

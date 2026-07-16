@@ -78,6 +78,8 @@ app.use('/api/acoes', require('./routes/acoesRoutes'));
 
 app.use('/api/prestacao-contas', require('./routes/prestacaoRoutes'));
 
+app.use('/api/equipe', require('./routes/equipe'));
+
 /* ============================================
    NOVA ROTA - CREDENCIADOS
 ============================================ */

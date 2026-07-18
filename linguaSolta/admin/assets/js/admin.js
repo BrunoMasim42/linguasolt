@@ -126,19 +126,30 @@ async function loadDashboard() {
   if (!countProjetos) return;
 
   try {
-    const [acoes, projetos, galeria, banners, contatos, prestacao] = await Promise.all([
-      request('/acoes'),
-      request('/projetos'),
-      request('/galeria'),
-      request('/banners'),
-      request('/contatos'),
-      request('/prestacao-contas')
-    ]);
+    const [
+    acoes,
+    projetos,
+    galeria,
+    banners,
+    contatos,
+    prestacao,
+    equipe
+] = await Promise.all([
+    request('/acoes'),
+    request('/projetos'),
+    request('/galeria'),
+    request('/banners'),
+    request('/contatos'),
+    request('/prestacao-contas'),
+    request('/equipe')
+]);
 
     qs('#count-acoes') && (qs('#count-acoes').textContent = acoes.length);
     countProjetos.textContent = projetos.length;
     qs('#count-galeria').textContent = galeria.length;
     qs('#count-banners').textContent = banners.length;
+    qs('#count-equipe') &&
+    (qs('#count-equipe').textContent = equipe.length);
     qs('#count-contatos').textContent = contatos.length;
     qs('#count-prestacao').textContent = prestacao.length;
 
@@ -379,6 +390,149 @@ function bindPrestacao() {
   });
 }
 
+function bindEquipe() {
+
+    bindCrud({
+
+        formId: '#equipeForm',
+
+        tableId: '#listaEquipe',
+
+        statusId: '#status-equipe',
+
+        endpoint: '/equipe',
+
+        cacheName: '__equipe',
+
+        empty: '<tr><td colspan="6">Nenhum membro cadastrado.</td></tr>',
+
+        columns: (item) => `
+
+            <td>${thumb(item.foto, item.nome)}</td>
+
+            <td>${escapeHtml(item.nome || '-')}</td>
+
+            <td>${escapeHtml(item.cargo || '-')}</td>
+
+            <td>${escapeHtml(item.ordem ?? 0)}</td>
+
+            <td>
+
+                <span class="pill ${Number(item.ativo) ? 'success' : 'muted'}">
+
+                    ${Number(item.ativo) ? 'Ativo' : 'Inativo'}
+
+                </span>
+
+            </td>
+
+        `,
+
+        fillForm: (item, form) => {
+
+            qs('#id', form).value = item.id || '';
+
+            qs('#nome', form).value = item.nome || '';
+
+            qs('#cargo', form).value = item.cargo || '';
+
+            qs('#biografia', form).value = item.biografia || '';
+
+            qs('#facebook', form).value = item.facebook || '';
+
+            qs('#instagram', form).value = item.instagram || '';
+
+            qs('#whatsapp', form).value = item.whatsapp || '';
+
+            qs('#ordem', form).value = item.ordem ?? 0;
+
+            qs('#ativo', form).value = String(item.ativo ?? 1);
+
+            const preview = qs('#preview', form);
+
+            if (preview) {
+
+                if (item.foto) {
+
+                    preview.src = mediaUrl(item.foto);
+
+                    preview.style.display = 'block';
+
+                } else {
+
+                    preview.src = '';
+
+                    preview.style.display = 'none';
+
+                }
+
+            }
+
+        },
+
+        cancelId: '#cancelar-equipe'
+
+    });
+
+    const form = qs('#equipeForm');
+
+    if (!form) return;
+
+    const foto = qs('#foto', form);
+
+    const preview = qs('#preview', form);
+
+    if (foto && preview) {
+
+        foto.addEventListener('change', () => {
+
+            if (!foto.files.length) {
+
+                preview.src = '';
+
+                preview.style.display = 'none';
+
+                return;
+
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+
+                preview.src = e.target.result;
+
+                preview.style.display = 'block';
+
+            };
+
+            reader.readAsDataURL(foto.files[0]);
+
+        });
+
+    }
+
+    const limparPreview = () => {
+
+        if (!preview) return;
+
+        preview.src = '';
+
+        preview.style.display = 'none';
+
+    };
+
+    form.addEventListener('reset', () => {
+
+        setTimeout(limparPreview, 0);
+
+    });
+
+    qs('#cancelar-equipe')?.addEventListener('click', limparPreview);
+
+}
+
+
 async function bindPaginas() {
   const form = qs('#form-pagina');
   if (!form) return;
@@ -479,6 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
   bindContatos();
   bindPrestacao();
   loadDashboard();
+  bindEquipe();
 
   qs('#logout-btn')?.addEventListener('click', (event) => {
     event.preventDefault();

@@ -229,6 +229,135 @@ async function loadQuemSomos() {
   }
 }
 
+/* =====================================================
+   NOSSA EQUIPE
+===================================================== */
+
+async function loadEquipe() {
+
+    const container = qs("#listaEquipe");
+
+    if (!container) return;
+
+    try {
+
+        const membros = await apiGet("/equipe");
+
+        const ativos = membros.filter(m => Number(m.ativo) === 1);
+
+        if (!ativos.length) {
+
+            container.innerHTML = `
+
+                <div class="empty-state">
+
+                    Nenhum membro cadastrado.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+        container.innerHTML = ativos.map(membro => `
+
+            <article class="card equipe-card reveal">
+
+                <div class="equipe-foto">
+
+                    <img
+                        src="${mediaUrl(membro.foto)}"
+                        alt="${escapeHtml(membro.nome)}">
+
+                </div>
+
+                <div class="equipe-info">
+
+                    <h3>
+
+                        ${escapeHtml(membro.nome)}
+
+                    </h3>
+
+                    <span class="cargo">
+
+                        ${escapeHtml(membro.cargo)}
+
+                    </span>
+
+                    <p>
+
+                        ${escapeHtml(membro.biografia || "")}
+
+                    </p>
+
+                    <div class="equipe-redes">
+
+                        ${membro.facebook ? `
+                        <a
+                            href="${membro.facebook}"
+                            target="_blank">
+
+                            <i class='bx bxl-facebook'></i>
+
+                        </a>
+                        ` : ""}
+
+                        ${membro.instagram ? `
+                        <a
+                            href="${membro.instagram}"
+                            target="_blank">
+
+                            <i class='bx bxl-instagram'></i>
+
+                        </a>
+                        ` : ""}
+
+                        ${membro.whatsapp ? `
+                        <a
+                            href="https://wa.me/${String(membro.whatsapp).replace(/\D/g,'')}"
+                            target="_blank">
+
+                            <i class='bx bxl-whatsapp'></i>
+
+                        </a>
+                        ` : ""}
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        `).join("");
+
+        refreshRevealTargets(container);
+
+    }
+
+    catch (erro) {
+
+        console.error(erro);
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                Erro ao carregar a equipe.
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+
+
 async function loadBanners() {
   const track = qs('#banners-track');
   if (!track) return;
@@ -450,6 +579,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadGaleria();
   loadPrestacao();
   loadQuemSomos();
+  loadEquipe();
 
 });
 

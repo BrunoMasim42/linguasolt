@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro | Instituto Língua Solta</title>
+
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/cadastro.css">
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <script src="./assets/js/site.js" defer></script>
+    <script src="./assets/js/cadastro.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <!-- COPIE EXATAMENTE O MESMO HEADER DO index.html -->
+    <div id="header"></div>
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="cadastro-hero">
+
+            <div class="container">
+
+                <span class="cadastro-badge">
+
+                    Seja um associado
+
+                </span>
+
+                <h1>
+
+                    Cadastro de Associado
+
+                </h1>
+
+                <p>
+
+                    Preencha o formulário abaixo para fazer parte do Instituto Língua Solta.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FORMULÁRIO -->
+
+        <section class="cadastro-section">
+
+            <div class="container">
+
+                <!-- Barra -->
+
+                <div class="progress">
+
+                    <div class="progress-bar"></div>
+
+                </div>
+
+                <div class="steps">
+
+                    <span class="active">1. Dados</span>
+
+                    <span>2. Atuação</span>
+
+                    <span>3. Experiência</span>
+
+                    <span>4. Finalizar</span>
+
+                </div>
+
+
+
+                <form id="cadastroForm">
+
+                    <!-- ETAPA 1 -->
+
+                   <div class="form-step active">
+
+    <div class="card-form">
+
+        <h2>Dados Pessoais</h2>
+
+        <div class="grid-2">
+
+            <div>
+                <label>Nome completo *</label>
+                <input type="text" name="nome" required>
+            </div>
+
+            <div>
+                <label>E-mail *</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div>
+                <label>Telefone *</label>
+                <input type="text" name="telefone" required>
+            </div>
+
+            <div>
+                <label>Cidade *</label>
+                <input type="text" name="cidade" required>
+            </div>
+
+            <div>
+                <label>Idade *</label>
+                <input type="number" name="idade" required>
+            </div>
+
+            <div>
+                <label>Escolaridade *</label>
+
+                <select name="escolaridade" required>
+
+                    <option value="">Selecione</option>
+
+                    <option>Ensino Fundamental</option>
+
+                    <option>Ensino Médio</option>
+
+                    <option>Ensino Técnico</option>
+
+                    <option>Ensino Superior</option>
+
+                    <option>Pós-graduação</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Raça / Etnia</label>
+
+                <select name="raca">
+
+                    <option value="">Selecione</option>
+
+                    <option>Branca</option>
+
+                    <option>Preta</option>
+
+                    <option>Parda</option>
+
+                    <option>Amarela</option>
+
+                    <option>Indígena</option>
+
+                    <option>Prefiro não informar</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Identidade de gênero</label>
+
+                <select name="genero">
+
+                    <option value="">Selecione</option>
+
+                    <option>Mulher Cis</option>
+
+                    <option>Homem Cis</option>
+
+                    <option>Mulher Trans</option>
+
+                    <option>Homem Trans</option>
+
+                    <option>Não Binário</option>
+
+                    <option>Outro</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Orientação Sexual</label>
+
+                <select name="orientacao">
+
+                    <option value="">Selecione</option>
+
+                    <option>Heterossexual</option>
+
+                    <option>Homossexual</option>
+
+                    <option>Bissexual</option>
+
+                    <option>Pansexual</option>
+
+                    <option>Assexual</option>
+
+                    <option>Prefiro não informar</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>É Pessoa com Deficiência (PCD)?</label>
+
+                <select name="pcd">
+
+                    <option>Não</option>
+
+                    <option>Sim</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="buttons">
+
+        <button type="button" class="btn next">
+
+            Próximo →
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+                    <!-- ETAPA 2 -->
+
+                <div class="form-step">
+
+<div class="card-form">
+
+<h2>Atuação Cultural</h2>
+
+<label>Você atua como:</label>
+
+<select name="modalidade">
+
+<option>Artista Individual</option>
+
+<option>Coletivo</option>
+
+<option>Grupo Cultural</option>
+
+<option>Instituição</option>
+
+</select>
+
+<br><br>
+
+<label>Áreas de atuação</label>
+
+<div class="checkbox-grid">
+
+<label><input type="checkbox" name="areas" value="Artes Visuais"> Artes Visuais</label>
+
+<label><input type="checkbox" name="areas" value="Artesanato"> Artesanato</label>
+
+<label><input type="checkbox" name="areas" value="Audiovisual"> Audiovisual</label>
+
+<label><input type="checkbox" name="areas" value="Cinema"> Cinema</label>
+
+<label><input type="checkbox" name="areas" value="Circo"> Circo</label>
+
+<label><input type="checkbox" name="areas" value="Cultura Popular"> Cultura Popular</label>
+
+<label><input type="checkbox" name="areas" value="Dança"> Dança</label>
+
+<label><input type="checkbox" name="areas" value="Fotografia"> Fotografia</label>
+
+<label><input type="checkbox" name="areas" value="Hip Hop"> Hip Hop</label>
+
+<label><input type="checkbox" name="areas" value="Literatura"> Literatura</label>
+
+<label><input type="checkbox" name="areas" value="Música"> Música</label>
+
+<label><input type="checkbox" name="areas" value="Teatro"> Teatro</label>
+
+</div>
+
+<br>
+
+<label>Participa de alguma associação?</label>
+
+<select name="associacao">
+
+<option>Não</option>
+
+<option>Sim</option>
+
+</select>
+
+<br><br>
+
+<label>Qual?</label>
+
+<input type="text" name="qual_associacao">
+
+</div>
+
+<div class="buttons">
+
+<button type="button" class="btn prev">← Voltar</button>
+
+<button type="button" class="btn next">Próximo →</button>
+
+</div>
+
+</div>
+
+
+
+                    <!-- ETAPA 3 -->
+<div class="form-step">
+
+    <div class="card-form">
+
+        <h2>Experiência e Atuação</h2>
+
+        <div class="grid-1">
+
+            <div>
+
+                <label>Município ou local onde desenvolve sua atuação cultural *</label>
+
+                <input
+                    type="text"
+                    name="local_atuacao"
+                    required>
+
+            </div>
+
+            <div>
+
+                <label>Você pertence a alguma comunidade tradicional?</label>
+
+                <select name="comunidade">
+
+                    <option value="">Selecione</option>
+
+                    <option>Não</option>
+                    <option>Quilombola</option>
+                    <option>Indígena</option>
+                    <option>Ribeirinha</option>
+                    <option>Extrativista</option>
+                    <option>Cigana</option>
+                    <option>Outra</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Descreva sua atuação cultural *</label>
+
+                <textarea
+                    name="descricao"
+                    required
+                    placeholder="Conte um pouco sobre seu trabalho, seus projetos, sua trajetória e como atua na cultura."></textarea>
+
+            </div>
+
+            <div>
+
+                <label>Qual sua principal função?</label>
+
+                <select name="funcao">
+
+                    <option value="">Selecione</option>
+
+                    <option>Artista</option>
+                    <option>Produtor(a)</option>
+                    <option>Arte Educador(a)</option>
+                    <option>Gestor(a) Cultural</option>
+                    <option>Pesquisador(a)</option>
+                    <option>Técnico(a)</option>
+                    <option>Artesão(ã)</option>
+                    <option>Outro</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Se marcou "Outro", qual?</label>
+
+                <input
+                    type="text"
+                    name="funcao_outro">
+
+            </div>
+
+            <div>
+
+                <label>Já participou de editais, premiações ou projetos culturais?</label>
+
+                <select name="editais">
+
+                    <option value="">Selecione</option>
+
+                    <option>Sim</option>
+                    <option>Não</option>
+
+                </select>
+
+            </div>
+
+            <div>
+
+                <label>Se respondeu SIM, conte um pouco.</label>
+
+                <textarea
+                    name="historico"
+                    placeholder="Informe editais, projetos, premiações ou ações culturais das quais participou."></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="buttons">
+
+        <button
+            type="button"
+            class="btn prev">
+
+            ← Voltar
+
+        </button>
+
+        <button
+            type="button"
+            class="btn next">
+
+            Próximo →
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+                    <!-- ETAPA 4 -->
+
+             <div class="form-step">
+
+    <div class="card-form">
+
+        <h2>Finalizar Cadastro</h2>
+
+        <p style="margin-bottom:30px">
+
+            Você está quase terminando seu cadastro.
+
+            Antes de enviar, confirme que as informações fornecidas são verdadeiras.
+
+        </p>
+
+        <label style="display:flex;align-items:center;gap:12px">
+
+            <input
+                type="checkbox"
+                name="termos"
+                required>
+
+            Declaro que todas as informações são verdadeiras e autorizo o Instituto Língua Solta a armazenar estes dados para fins institucionais.
+
+        </label>
+
+    </div>
+
+    <div class="buttons">
+
+        <button
+            type="button"
+            class="btn prev">
+
+            ← Voltar
+
+        </button>
+
+        <button
+            type="submit"
+            class="btn">
+
+            Finalizar Cadastro
+
+        </button>
+
+    </div>
+
+</div>
+
+                </form>
+
+                <div id="formMessage" class="form-message"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+    <!-- COPIE EXATAMENTE O MESMO FOOTER DO index.html -->
+
+     <div id="footer"></div>
+
+  <script src="./js/components.js"></script>
+  <script src="./js/site.js"></script>
+
+</body>
+
+</html>

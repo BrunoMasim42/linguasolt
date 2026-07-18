@@ -14,107 +14,152 @@
 </head>
 
 <body>
+    <nav><a href="dashboard.html">Dashboard</a>
+        <a href="acoes.html">Ações</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="galeria.html">Galeria</a>
+        <a href="credenciados.html">Credenciados</a>
+        <a href="banners.html">Banners</a>
+        <a href="paginas.html">Páginas</a>
+        <a href="prestacao.html">Prestação</a>
+        <a href="contatos.html">Contatos</a>
+        <a href="#" id="logout-btn">Sair</a>
+    </nav>
 
 <div class="container">
 
-    <h1>Equipe do Instituto</h1>
+ <h1>Equipe do Instituto</h1>
+
+<div class="card">
 
     <form id="equipeForm" enctype="multipart/form-data">
 
         <input type="hidden" id="id">
 
-        <label>Foto</label>
-
+        <label for="foto">Foto</label>
         <input
             type="file"
             id="foto"
             name="foto"
             accept="image/*">
 
-        <div style="margin:15px 0">
-
+        <div class="preview-box">
             <img
                 id="preview"
                 src=""
-                style="display:none;width:130px;height:130px;border-radius:50%;object-fit:cover;border:3px solid #ccc">
+                alt="Preview"
+                style="display:none;">
+        </div>
+
+        <div class="form-grid">
+
+            <div>
+                <label for="nome">Nome</label>
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    required>
+            </div>
+
+            <div>
+                <label for="cargo">Cargo</label>
+                <input
+                    type="text"
+                    id="cargo"
+                    name="cargo"
+                    required>
+            </div>
 
         </div>
 
-        <label>Nome</label>
-
-        <input
-            type="text"
-            id="nome"
-            name="nome"
-            required>
-
-        <label>Cargo</label>
-
-        <input
-            type="text"
-            id="cargo"
-            name="cargo"
-            required>
-
-        <label>Mini Biografia</label>
-
+        <label for="biografia">Mini Biografia</label>
         <textarea
             id="biografia"
             name="biografia"
             rows="5"></textarea>
 
-        <label>Facebook</label>
+        <h3 style="margin:20px 0 10px">Redes Sociais</h3>
 
-        <input
-            type="url"
-            id="facebook"
-            name="facebook">
+        <div class="form-grid">
 
-        <label>Instagram</label>
+            <div>
+                <label for="facebook">Facebook</label>
+                <input
+                    type="url"
+                    id="facebook"
+                    name="facebook">
+            </div>
 
-        <input
-            type="url"
-            id="instagram"
-            name="instagram">
+            <div>
+                <label for="instagram">Instagram</label>
+                <input
+                    type="url"
+                    id="instagram"
+                    name="instagram">
+            </div>
 
-        <label>WhatsApp</label>
+        </div>
 
+        <label for="whatsapp">WhatsApp</label>
         <input
             type="text"
             id="whatsapp"
             name="whatsapp">
 
-        <label>Ordem de Exibição</label>
+        <div class="form-grid">
 
-        <input
-            type="number"
-            id="ordem"
-            name="ordem"
-            value="0">
+            <div>
+                <label for="ordem">Ordem de Exibição</label>
+                <input
+                    type="number"
+                    id="ordem"
+                    name="ordem"
+                    value="0">
+            </div>
 
-        <label>Status</label>
+            <div>
+                <label for="ativo">Status</label>
+                <select
+                    id="ativo"
+                    name="ativo">
+                    <option value="1">Ativo</option>
+                    <option value="0">Inativo</option>
+                </select>
+            </div>
 
-        <select
-            id="ativo"
-            name="ativo">
+        </div>
 
-            <option value="1">Ativo</option>
+        <div class="toolbar">
 
-            <option value="0">Inativo</option>
+            <button
+                class="btn"
+                type="submit">
+                Salvar Membro
+            </button>
 
-        </select>
+            <button
+                class="btn alt"
+                type="reset"
+                id="cancelar-equipe">
+                Cancelar
+            </button>
 
-        <button type="submit">
+        </div>
 
-            Salvar Membro
-
-        </button>
+        <p
+            id="status-equipe"
+            class="status muted"></p>
 
     </form>
 
-    <hr>
+</div>
 
-    <h2>Membros Cadastrados</h2>
+<div class="card table-wrap">
+
+    <h2 style="margin-bottom:15px">
+        Membros Cadastrados
+    </h2>
 
     <table>
 
@@ -122,23 +167,24 @@
 
             <tr>
 
-                <th>Foto</th>
-
+                <th width="90">Foto</th>
                 <th>Nome</th>
-
                 <th>Cargo</th>
-
-                <th>Status</th>
-
-                <th>Ações</th>
+                <th width="90">Ordem</th>
+                <th width="120">Status</th>
+                <th width="180">Ações</th>
 
             </tr>
 
         </thead>
 
-        <tbody id="listaEquipe"></tbody>
+        <tbody id="listaEquipe">
+
+        </tbody>
 
     </table>
+
+</div>
 
 </div>
 

@@ -105,7 +105,7 @@ async function cadastrar(dados) {
 
     ];
 
-    const [result] = await db.query(sql, valores);
+    const [result] = await db.execute(sql, valores);
 
     return result.insertId;
 

@@ -155,29 +155,17 @@ form.addEventListener("submit", async (event) => {
 
         });
 
-        //const resultado = await resposta.json();
+        
 
-        //if (!resposta.ok) {
+        const resultado = await resposta.json();
 
-           // throw new Error(resultado.erro || "Erro ao realizar cadastro.");
+        if (!resposta.ok) {
 
-       // }
+            throw new Error(resultado.erro || "Erro ao realizar cadastro.");
+
+       }
 
 
-       const texto = await resposta.text();
-
-console.log("STATUS:", resposta.status);
-console.log("RESPOSTA:", texto);
-
-let resultado = {};
-
-try {
-    resultado = JSON.parse(texto);
-} catch {}
-
-if (!resposta.ok) {
-    throw new Error(resultado.erro || texto || "Erro ao realizar cadastro.");
-}
 
 
 

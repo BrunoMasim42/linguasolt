@@ -65,43 +65,41 @@ async function cadastrar(dados) {
             editais,
             historico
 
-        )
+        ) VALUES (
 
-        VALUES (
-
-            ?,?,?,?,?,?,
-            ?,?,?,?,?,?,
-            ?,?,?,?,?,?,
-            ?,?,?,?,?,?
+            ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?
 
         )
     `;
 
     const valores = [
 
-        dados.nome,
-        dados.cpf,
-        dados.rg,
-        dados.nascimento,
-        dados.sexo,
-        dados.email,
-        dados.telefone,
-        dados.cep,
-        dados.endereco,
-        dados.numero,
-        dados.complemento,
-        dados.bairro,
-        dados.cidade,
-        dados.estado,
-        dados.profissao,
-        dados.escolaridade,
-        dados.local_atuacao,
-        dados.comunidade,
-        dados.descricao,
-        dados.funcao,
-        dados.funcao_outro,
-        dados.editais,
-        dados.historico
+        dados.nome || null,
+        dados.cpf || null,
+        dados.rg || null,
+        dados.nascimento || null,
+        dados.sexo || null,
+        dados.email || null,
+        dados.telefone || null,
+        dados.cep || null,
+        dados.endereco || null,
+        dados.numero || null,
+        dados.complemento || null,
+        dados.bairro || null,
+        dados.cidade || null,
+        dados.estado || null,
+        dados.profissao || null,
+        dados.escolaridade || null,
+        dados.local_atuacao || null,
+        dados.comunidade || null,
+        dados.descricao || null,
+        dados.funcao || null,
+        dados.funcao_outro || null,
+        dados.editais || null,
+        dados.historico || null
 
     ];
 

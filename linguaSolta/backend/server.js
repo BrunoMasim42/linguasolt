@@ -80,6 +80,8 @@ app.use('/api/prestacao-contas', require('./routes/prestacaoRoutes'));
 
 app.use('/api/equipe', require('./routes/equipeRoutes'));
 
+app.use("/api/associados", require("./routes/associadosRoutes"));
+
 /* ============================================
    NOVA ROTA - CREDENCIADOS
 ============================================ */

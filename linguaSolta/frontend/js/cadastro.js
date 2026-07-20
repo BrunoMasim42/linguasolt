@@ -117,47 +117,105 @@ document.addEventListener("DOMContentLoaded", () => {
        ENVIO
     ============================== */
 
-    form.addEventListener("submit", (event) => {
+    /* ==============================
+   ENVIO
+============================== */
 
-        event.preventDefault();
+form.addEventListener("submit", async (event) => {
 
-        if (!validateStep(steps[currentStep])) {
-            return;
-        }
+    event.preventDefault();
 
-        const dados = Object.fromEntries(
-            new FormData(form).entries()
-        );
+    if (!validateStep(steps[currentStep])) {
+        return;
+    }
 
-        console.log(dados);
+    const dados = Object.fromEntries(
+        new FormData(form).entries()
+    );
 
-        const msg = document.getElementById("formMessage");
-        const submitButton = form.querySelector("button[type='submit']");
+    const msg = document.getElementById("formMessage");
+    const submitButton = form.querySelector("button[type='submit']");
 
-        submitButton.classList.add("loading");
-        submitButton.textContent = "Enviando...";
+    submitButton.classList.add("loading");
+    submitButton.textContent = "Enviando...";
 
-        setTimeout(() => {
+    try {
 
-            msg.className = "form-message success";
+        const resposta = await fetch("/api/associados", {
 
-            msg.innerHTML = `
-                ✔ Cadastro realizado com sucesso!
-                <br><br>
-                Obrigado por fazer parte do Instituto Língua Solta.
-            `;
+            method: "POST",
 
-            submitButton.classList.remove("loading");
-            submitButton.textContent = "Finalizar Cadastro";
+            headers: {
 
-            form.reset();
+                "Content-Type": "application/json"
 
-            currentStep = 0;
-            showStep(currentStep);
+            },
 
-        }, 1500);
+            body: JSON.stringify(dados)
 
-    });
+        });
+
+        //const resultado = await resposta.json();
+
+        //if (!resposta.ok) {
+
+           // throw new Error(resultado.erro || "Erro ao realizar cadastro.");
+
+       // }
+
+
+       const texto = await resposta.text();
+
+console.log("STATUS:", resposta.status);
+console.log("RESPOSTA:", texto);
+
+let resultado = {};
+
+try {
+    resultado = JSON.parse(texto);
+} catch {}
+
+if (!resposta.ok) {
+    throw new Error(resultado.erro || texto || "Erro ao realizar cadastro.");
+}
+
+
+
+        msg.className = "form-message success";
+
+        msg.innerHTML = `
+            ✔ Cadastro realizado com sucesso!
+            <br><br>
+            Seja bem-vindo(a) ao Instituto Língua Solta.
+        `;
+
+        form.reset();
+
+        currentStep = 0;
+
+        showStep(currentStep);
+
+    }
+
+    catch (erro) {
+
+        msg.className = "form-message error";
+
+        msg.textContent = erro.message;
+
+    }
+
+    finally {
+
+        submitButton.classList.remove("loading");
+
+        submitButton.textContent = "Finalizar Cadastro";
+
+    }
+
+});
+
+  
 
     /* ==============================
        INICIAR

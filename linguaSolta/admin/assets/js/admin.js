@@ -80,9 +80,28 @@ async function request(path, opts = {}) {
 }
 
 async function sendForm(path, form, editingId = '') {
-  const method = editingId ? 'PUT' : 'POST';
-  const url = editingId ? `${path}/${editingId}` : path;
-  return request(url, { method, body: new FormData(form) });
+
+    const method = editingId ? 'PUT' : 'POST';
+    const url = editingId ? `${path}/${editingId}` : path;
+
+    const formData = new FormData(form);
+
+    // Checkbox "capa"
+    const capa = form.querySelector('[name=capa]');
+
+    if (capa) {
+
+        formData.set('capa', capa.checked ? 1 : 0);
+
+    }
+
+    return request(url, {
+
+        method,
+        body: formData
+
+    });
+
 }
 
 function fillSidebar() {
@@ -320,26 +339,85 @@ function bindProjetos() {
 }
 
 function bindGaleria() {
-  bindCrud({
-    formId: '#form-galeria',
-    tableId: '#tbody-galeria',
-    statusId: '#status-galeria',
-    endpoint: '/galeria',
-    cacheName: '__galeria',
-    empty: '<tr><td colspan="5">Nenhuma foto cadastrada.</td></tr>',
-    columns: (item) => `
-      <td>${thumb(item.imagem, item.titulo)}</td>
-      <td>${escapeHtml(item.titulo || '-')}</td>
-      <td>${escapeHtml(item.descricao || '-')}</td>
-      <td>${escapeHtml(item.ordem ?? 0)}</td>
-    `,
-    fillForm: (item, form) => {
-      qs('[name=titulo]', form).value = item.titulo || '';
-      qs('[name=descricao]', form).value = item.descricao || '';
-      qs('[name=ordem]', form).value = item.ordem || 0;
-      qs('[name=ativo]', form).value = String(item.ativo);
+
+    bindCrud({
+
+        formId: '#form-galeria',
+
+        tableId: '#tbody-galeria',
+
+        statusId: '#status-galeria',
+
+        endpoint: '/galeria',
+
+        cacheName: '__galeria',
+
+        empty: 'Nenhuma foto cadastrada.',
+
+        columns: (item) => `
+
+            <td>
+
+                <img
+                    src="${mediaUrl(item.imagem)}"
+                    style="width:80px;height:60px;object-fit:cover;border-radius:8px">
+
+            </td>
+
+            <td>
+
+                ${item.ano || "-"}
+
+            </td>
+
+            <td>
+
+                ${
+                    Number(item.capa) === 1
+                        ? '<span class="badge success">Capa</span>'
+                        : '-'
+                }
+
+            </td>
+
+            <td>
+
+                ${escapeHtml(item.titulo || "")}
+
+            </td>
+
+            <td>
+
+                ${item.ordem ?? 0}
+
+            </td>
+
+        `,
+
+        fillForm: (item, form) => {
+
+    qs('[name=titulo]', form).value = item.titulo || '';
+
+    qs('[name=ano]', form).value = item.ano || '';
+
+    qs('[name=descricao]', form).value = item.descricao || '';
+
+    qs('[name=ordem]', form).value = item.ordem || 0;
+
+    qs('[name=ativo]', form).value = String(item.ativo);
+
+    const capa = qs('[name=capa]', form);
+
+    if (capa) {
+
+        capa.checked = Number(item.capa) === 1;
+
     }
-  });
+
+}
+
+    });
+
 }
 
 function bindBanners() {

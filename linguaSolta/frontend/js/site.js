@@ -464,52 +464,217 @@ async function loadProjetos(limit = null) {
 }
 
 async function loadGaleria() {
-  const wrap = qs('#lista-galeria');
-  if (!wrap) return;
 
-  try {
-    const photos = (await apiGet('/galeria')).filter((photo) => photo.ativo !== 0);
+    const wrap = qs("#lista-galeria");
 
-    function render(query = '') {
-      const normalized = query.trim().toLowerCase();
-      const filtered = photos.filter((photo) => {
-        const text = `${photo.titulo || ''} ${photo.descricao || ''}`.toLowerCase();
-        return !normalized || text.includes(normalized);
-      });
+    if (!wrap) return;
 
-      wrap.innerHTML =
-        filtered
-          .map((photo) => `
-            <figure class="foto" data-title="${escapeHtml(photo.titulo || '')}" data-description="${escapeHtml(photo.descricao || '')}" data-image="${mediaUrl(photo.imagem)}">
-              <img src="${mediaUrl(photo.imagem)}" alt="${escapeHtml(photo.titulo || 'Foto da galeria')}">
-              <figcaption>
-                <strong>${escapeHtml(photo.titulo || 'Registro da galeria')}</strong>
-                <span>${escapeHtml(photo.descricao || 'Clique para ampliar')}</span>
-              </figcaption>
-            </figure>
-          `)
-          .join('') || '<p class="empty-state">Nenhuma foto encontrada.</p>';
+    try {
 
-      refreshRevealTargets(wrap);
+        const fotos = (await apiGet("/galeria"))
+            .filter(f => Number(f.ativo) === 1);
+
+        if (!fotos.length) {
+
+            wrap.innerHTML = `
+                <div class="empty-state">
+                    Nenhuma campanha cadastrada.
+                </div>
+            `;
+
+            return;
+
+        }
+
+        // Agrupa por ano
+        const campanhas = {};
+
+        fotos.forEach(foto => {
+
+            if (!campanhas[foto.ano]) {
+
+                campanhas[foto.ano] = {
+
+                    capa: null,
+
+                    fotos: []
+
+                };
+
+            }
+
+            campanhas[foto.ano].fotos.push(foto);
+
+            if (Number(foto.capa) === 1) {
+
+                campanhas[foto.ano].capa = foto;
+
+            }
+
+        });
+
+        // Se não existir capa, usa a primeira foto
+        Object.keys(campanhas).forEach(ano => {
+
+            if (!campanhas[ano].capa) {
+
+                campanhas[ano].capa = campanhas[ano].fotos[0];
+
+            }
+
+        });
+
+        const anos = Object.keys(campanhas)
+            .sort((a, b) => b - a);
+
+        wrap.innerHTML = anos.map(ano => {
+
+            const pasta = campanhas[ano];
+
+            return `
+
+            <article
+                class="pasta-galeria"
+                data-ano="${ano}">
+
+                <img
+                    src="${mediaUrl(pasta.capa.imagem)}"
+                    alt="Campanha ${ano}">
+
+                <div class="pasta-info">
+
+                    <h3>
+
+    📁 ${escapeHtml(pasta.capa.titulo)}
+
+</h3>
+
+<span>
+
+    ${ano}
+
+</span>
+
+<p>
+
+    ${pasta.fotos.length}
+    foto${pasta.fotos.length > 1 ? "s" : ""}
+
+</p>
+
+                </div>
+
+            </article>
+
+            `;
+
+        }).join("");
+
+        wrap.onclick = (e) => {
+
+            const pasta = e.target.closest(".pasta-galeria");
+
+            if (!pasta) return;
+
+            const ano = pasta.dataset.ano;
+
+            mostrarCampanha(ano, campanhas[ano].fotos);
+
+        };
+
     }
 
-    qs('#busca-galeria')?.addEventListener('input', (event) => render(event.target.value));
-    wrap.addEventListener('click', (event) => {
-      const photo = event.target.closest('.foto');
-      if (!photo) return;
-      openModal({
-        modal: qs('#modal-galeria'),
-        image: photo.dataset.image,
-        title: photo.dataset.title,
-        description: photo.dataset.description
-      });
-    });
+    catch (erro) {
 
-    render();
-  } catch {
-    wrap.innerHTML = '<p class="empty-state">Erro ao carregar galeria.</p>';
-  }
+        console.error(erro);
+
+        wrap.innerHTML = `
+            <div class="empty-state">
+                Erro ao carregar galeria.
+            </div>
+        `;
+
+    }
+
 }
+
+
+function mostrarCampanha(ano, fotos) {
+
+    const wrap = qs("#lista-galeria");
+
+    wrap.innerHTML = `
+
+        <button
+            class="btn-voltar-galeria">
+
+            ← Voltar para campanhas
+
+        </button>
+
+       <h2 class="titulo-campanha">
+
+    ${escapeHtml(fotos[0].titulo)}
+
+    <small>
+
+        ${ano}
+
+    </small>
+
+</h2>
+
+        <div class="grid-3">
+
+            ${fotos.map(foto => `
+
+                <figure
+                    class="foto"
+                    data-title="${escapeHtml(foto.titulo || "")}"
+                    data-description="${escapeHtml(foto.descricao || "")}"
+                    data-image="${mediaUrl(foto.imagem)}">
+
+                    <img
+                        src="${mediaUrl(foto.imagem)}"
+                        alt="${escapeHtml(foto.titulo || "")}">
+
+                </figure>
+
+            `).join("")}
+
+        </div>
+
+    `;
+
+    qs(".btn-voltar-galeria").onclick = loadGaleria;
+
+    wrap.onclick = (e) => {
+
+        const foto = e.target.closest(".foto");
+
+        if (!foto) return;
+
+        openModal({
+
+            modal: qs("#modal-galeria"),
+
+            image: foto.dataset.image,
+
+            title: foto.dataset.title,
+
+            description: foto.dataset.description
+
+        });
+
+    };
+
+}
+
+
+
+
+
+
 
 async function loadPrestacao() {
   const tableBody = qs('#prestacao-body');
@@ -596,3 +761,93 @@ qsa('.menu a').forEach((link) => {
 });
 
 
+/* ==========================================
+   ANIMAÇÃO AO ROLAR A PÁGINA
+========================================== */
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("reveal-show");
+
+        }
+
+    });
+
+},{
+    threshold:0.15
+});
+
+document.querySelectorAll(
+".reveal-left,.reveal-right,.reveal-up"
+).forEach(el=>observer.observe(el));
+
+
+
+/* ===================================================
+   ANIMAÇÕES DE SCROLL
+=================================================== */
+
+/* ===================================================
+   ANIMAÇÕES PREMIUM
+=================================================== */
+
+function iniciarAnimacoes(){
+
+    const elementos=document.querySelectorAll(
+
+        ".reveal-left,.reveal-right,.reveal-up,.reveal-scale"
+
+    );
+
+    const observer=new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("reveal-show");
+
+            }
+
+        });
+
+    },{
+
+        threshold:.12
+
+    });
+
+    elementos.forEach(el=>observer.observe(el));
+
+
+
+    /* ===============================
+       EFEITO CASCATA
+    ================================ */
+
+    document.querySelectorAll(".actions-grid .card").forEach((card,index)=>{
+
+        card.style.transitionDelay=(index*120)+"ms";
+
+        card.classList.add("reveal-up");
+
+        observer.observe(card);
+
+    });
+
+
+    document.querySelectorAll(".grid-3 .card").forEach((card,index)=>{
+
+        card.style.transitionDelay=(index*120)+"ms";
+
+        card.classList.add("reveal-scale");
+
+        observer.observe(card);
+
+    });
+
+}

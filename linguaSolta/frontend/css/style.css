@@ -80,19 +80,43 @@ select{
 
 /* HEADER */
 .site-header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  min-height:var(--header-height);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:22px;
-  padding:12px 24px;
-  background:linear-gradient(105deg,rgba(122,0,31,.96),rgba(185,0,45,.94),rgba(255,95,138,.92));
-  box-shadow:0 12px 34px rgba(80,0,24,.2);
-  backdrop-filter:blur(14px);
-  transition:min-height .25s ease, box-shadow .25s ease, background .25s ease;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  z-index: 9999;
+
+  min-height: var(--header-height);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+
+  padding: 12px 24px;
+
+  background: linear-gradient(
+      105deg,
+      rgba(122,0,31,.96),
+      rgba(185,0,45,.94),
+      rgba(255,95,138,.92)
+  );
+
+  box-shadow: 0 12px 34px rgba(80,0,24,.20);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  transition:
+      min-height .25s ease,
+      box-shadow .25s ease,
+      background .25s ease,
+      padding .25s ease;
+
 }
 
 .site-header.is-scrolled{
@@ -104,11 +128,11 @@ select{
   width:132px;
   height:auto;
   filter:drop-shadow(0 8px 18px rgba(0,0,0,.18));
-  transition:transform .25s ease;
+  transition:transform .28s ease;
 }
 
 .logo img:hover{
-  transform:scale(1.03) rotate(-1deg);
+  transform:scale(1.35) rotate(-10deg);
 }
 
 .menu ul{
@@ -498,8 +522,8 @@ select{
 }
 
 .foto img{
-  width:100%;
-  height:260px;
+  width:180px;
+  height:220px;
   object-fit:cover;
   transition:transform .45s ease, filter .45s ease;
 }
@@ -516,6 +540,219 @@ select{
 .foto figcaption strong{
   color:var(--dark);
 }
+
+/* ==========================================
+   GALERIA POR CAMPANHAS
+========================================== */
+
+.galeria-pastas{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:35px;
+
+    margin-top:40px;
+
+}
+
+.pasta-galeria{
+
+    cursor:pointer;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.pasta-galeria:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 35px rgba(0,0,0,.16);
+
+}
+
+.pasta-galeria img{
+
+    width:100%;
+
+    height:250px;
+
+    object-fit:cover;
+
+}
+
+.pasta-info{
+
+    padding:20px;
+
+}
+
+.pasta-info h2{
+
+    margin:0;
+
+    color:#0a6b42;
+
+    font-size:1.4rem;
+
+}
+
+.pasta-info span{
+
+    display:block;
+
+    margin-top:8px;
+
+    color:#666;
+
+}
+
+.btn-voltar-galeria{
+
+    background:#0a6b42;
+
+    color:#fff;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    margin-bottom:30px;
+
+    transition:.3s;
+
+}
+
+.btn-voltar-galeria:hover{
+
+    background:#084f31;
+
+}
+
+.titulo-campanha{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+    color:#0a6b42;
+
+    font-size:2rem;
+
+}
+
+
+
+/* ==========================================
+   GALERIA POR CAMPANHAS
+========================================== */
+
+.galeria-pastas{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+    margin-top:40px;
+
+}
+
+.pasta-galeria{
+
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    cursor:pointer;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+    transition:.30s;
+
+}
+
+.pasta-galeria:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+
+}
+
+.pasta-galeria img{
+
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    display:block;
+
+}
+
+.pasta-info{
+
+    padding:18px;
+
+}
+
+.pasta-info h3{
+
+    margin:0;
+    font-size:22px;
+    color:#222;
+
+}
+
+.pasta-info span{
+
+    display:block;
+    margin-top:8px;
+    color:#666;
+    font-size:15px;
+
+}
+
+.btn-voltar-galeria{
+
+    background:#fd0d0d;
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:12px 18px;
+    cursor:pointer;
+
+    margin-bottom:25px;
+
+    transition:.25s;
+
+}
+
+.btn-voltar-galeria:hover{
+
+    background:#caaa0a;
+
+}
+
+.titulo-campanha{
+
+    margin-bottom:30px;
+    font-size:34px;
+    color:#222;
+
+}
+
+
 
 /* RICH TEXT */
 .rich-text p{
@@ -1025,7 +1262,7 @@ FOOTER NOVO
 }
 
 .footer-col{
-
+   
     flex:1;
 
     min-width:260px;
@@ -1064,7 +1301,7 @@ FOOTER NOVO
 
     flex-wrap:wrap;
 
-    gap:5px;
+    gap:10px;
 
     align-items:center;
 
@@ -1078,7 +1315,7 @@ FOOTER NOVO
 
     padding:5px;
 
-    height:130px;
+    height:100px;
 
     transition:.3s;
 
@@ -1262,6 +1499,64 @@ BOTÃO DE CADASTRO
     left:150%;
 
 }
+
+
+/* ==========================================
+   ANIMAÇÕES DE SCROLL
+========================================== */
+/* ==========================================
+   ANIMAÇÕES PREMIUM
+========================================== */
+
+.reveal-left,
+.reveal-right,
+.reveal-up,
+.reveal-scale{
+
+    opacity:0;
+
+    transition:
+        opacity .9s ease,
+        transform .9s cubic-bezier(.22,.61,.36,1);
+
+    will-change:transform,opacity;
+
+}
+
+.reveal-left{
+
+    transform:translateX(-120px);
+
+}
+
+.reveal-right{
+
+    transform:translateX(120px);
+
+}
+
+.reveal-up{
+
+    transform:translateY(90px);
+
+}
+
+.reveal-scale{
+
+    transform:scale(.85);
+
+}
+
+.reveal-show{
+
+    opacity:1;
+
+    transform:none;
+
+}
+
+
+
 
 
 

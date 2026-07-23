@@ -18,12 +18,12 @@ class CredenciadosModel {
                 instagram,
                 facebook,
                 imagem,
-                ordem_exibicao,
+                ordem,
                 ativo,
                 criado_em
             FROM credenciados
             WHERE ativo = 1
-            ORDER BY ordem_exibicao ASC, nome ASC
+            ORDER BY ordem ASC, nome ASC
         `);
 
         return rows;
@@ -62,7 +62,7 @@ class CredenciadosModel {
                 instagram,
                 facebook,
                 imagem,
-                ordem_exibicao,
+                ordem,
                 ativo
             )
             VALUES
@@ -82,7 +82,7 @@ class CredenciadosModel {
             dados.instagram,
             dados.facebook,
             dados.imagem,
-            dados.ordem_exibicao || 0,
+            dados.ordem || 0,
             dados.ativo ?? 1
 
         ];
@@ -109,7 +109,7 @@ class CredenciadosModel {
                 instagram = ?,
                 facebook = ?,
                 imagem = ?,
-                ordem_exibicao = ?,
+                ordem = ?,
                 ativo = ?
             WHERE id = ?
         `;
@@ -127,7 +127,7 @@ class CredenciadosModel {
             dados.instagram,
             dados.facebook,
             dados.imagem,
-            dados.ordem_exibicao || 0,
+            dados.ordem || 0,
             dados.ativo ?? 1,
             id
 

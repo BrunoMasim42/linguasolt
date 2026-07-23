@@ -81,7 +81,7 @@ class CredenciadosController {
                 instagram: req.body.instagram,
                 facebook: req.body.facebook,
                 imagem: req.body.imagem,
-                ordem_exibicao: req.body.ordem_exibicao,
+                ordem: req.body.ordem,
                 ativo: req.body.ativo
 
             };

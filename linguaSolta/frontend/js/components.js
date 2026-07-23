@@ -9,11 +9,19 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     await carregarFooter();
 
-    // Depois que o Header estiver carregado,
-    // reutiliza a lógica já existente no site.js
-    if (typeof initHeader === "function") {
-        initHeader();
-    }
+    requestAnimationFrame(() => {
+
+        ativarMenuAtual();
+
+        ativarHamburger();
+
+        if (typeof iniciarAnimacoes === "function") {
+
+            iniciarAnimacoes();
+
+        }
+
+    });
 
 });
 
